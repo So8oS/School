@@ -6,8 +6,8 @@
 
         public StudentRepo(SchoolDbContext _db)
         {
-          
-         }
+            db = _db;
+        }
         public void Add(Student entity)
         {
             db.Students.Add(entity);

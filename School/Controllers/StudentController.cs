@@ -64,10 +64,11 @@ namespace School.Controllers
         // POST: StudentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Student student)
         {
             try
             {
+                StudentRepository.Update(id, student);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -79,16 +80,19 @@ namespace School.Controllers
         // GET: StudentController/Delete/5
         public ActionResult Delete(int id)
         {
+            var student = StudentRepository.Find(id);
+
             return View();
         }
 
         // POST: StudentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Student student)
         {
             try
             {
+                StudentRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

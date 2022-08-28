@@ -9,7 +9,7 @@ namespace School.Models
 {
     public class Class
     {
-        [Key]
+       
         public int ClassId { get; set; }
 
        

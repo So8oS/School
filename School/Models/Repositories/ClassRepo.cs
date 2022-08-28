@@ -3,43 +3,41 @@
     public class ClassRepo : ISchoolRepository<Class>
     {
 
-        IList<Class> classes;
+        SchoolDbContext db;
 
-        public ClassRepo()
+        public ClassRepo(SchoolDbContext _db)
         {
-            classes = new List<Class>()
-                 {
-                    new Class(){ClassId=1},
-                    new Class(){ClassId=2},
-                    new Class(){ClassId=3},
-                };
+            db = _db;
         }
         public void Add(Class entity)
         {
-            classes.Add(entity);
+            db.Classes.Add(entity);
+            db.SaveChanges();
+
         }
 
         public void Delete(int id)
         {
             var Class = Find(id);
-            classes.Remove(Class);
+            db.Classes.Remove(Class);
+            db.SaveChanges();
         }
 
         public Class Find(int ClassID)
         {
-            var Class = classes.SingleOrDefault(x => x.ClassId == ClassID);
+            var Class = db.Classes.SingleOrDefault(x => x.ClassId == ClassID);
             return Class;
         }
 
         public IList<Class> List()
         {
-            return classes;
+            return db.Classes.ToList(); ;
         }
 
         public void Update(int id, Class newClass)
         {
-            var Class = Find(id);
-            Class.ClassId = newClass.ClassId;
+            db.Update(newClass);
+            db.SaveChanges();
         }
     }
 }

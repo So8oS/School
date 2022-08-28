@@ -16,7 +16,7 @@ namespace School.Models
 
         public int Grade { get; set; }
 
-        public Class Class { get; set; }
+       // public Class Class { get; set; }
 
 
     }

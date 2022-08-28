@@ -7,7 +7,7 @@ namespace School.Controllers
 {
     public class TeacherController : Controller
     {
-        private ISchoolRepository<Teacher> teacherRepository;
+        private readonly ISchoolRepository<Teacher> teacherRepository;
 
         public TeacherController(ISchoolRepository<Teacher> teacherRepository)
         {
@@ -38,6 +38,8 @@ namespace School.Controllers
             return View();
         }
 
+
+
         // POST: TeacherController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -57,16 +59,18 @@ namespace School.Controllers
         // GET: TeacherController/Edit/5
         public ActionResult Edit(int id)
         {
+            var teacher = teacherRepository.Find(id);
             return View();
         }
 
         // POST: TeacherController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Teacher teacher)
         {
             try
             {
+                teacherRepository.Update(id, teacher);  
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -78,16 +82,19 @@ namespace School.Controllers
         // GET: TeacherController/Delete/5
         public ActionResult Delete(int id)
         {
+            var teacher = teacherRepository.Find(id);
+
             return View();
         }
 
         // POST: TeacherController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Teacher teacher)
         {
             try
             {
+                teacherRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

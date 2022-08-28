@@ -11,8 +11,8 @@ using School.Models;
 namespace School.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20220826140408_addedfields")]
-    partial class addedfields
+    [Migration("20220828122812_create")]
+    partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,9 +44,6 @@ namespace School.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
@@ -55,8 +52,6 @@ namespace School.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ClassId");
 
                     b.ToTable("Students");
                 });
@@ -69,9 +64,6 @@ namespace School.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -82,31 +74,7 @@ namespace School.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ClassId");
-
                     b.ToTable("Teachers");
-                });
-
-            modelBuilder.Entity("School.Models.Student", b =>
-                {
-                    b.HasOne("School.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Class");
-                });
-
-            modelBuilder.Entity("School.Models.Teacher", b =>
-                {
-                    b.HasOne("School.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Class");
                 });
 #pragma warning restore 612, 618
         }

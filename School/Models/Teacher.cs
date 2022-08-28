@@ -14,7 +14,7 @@ namespace School.Models
         public int ID { get; set; }
         public String Occupation { get; set; }
 
-        public Class Class { get; set; }
+        //public Class Class { get; set; }
 
     }
 }
