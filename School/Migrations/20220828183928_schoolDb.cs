@@ -4,7 +4,7 @@
 
 namespace School.Migrations
 {
-    public partial class create : Migration
+    public partial class schoolDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

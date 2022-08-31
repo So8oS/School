@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.Models;
 
@@ -10,9 +11,10 @@ using School.Models;
 namespace School.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220829115453_convention")]
+    partial class convention
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,12 +105,17 @@ namespace School.Migrations
             modelBuilder.Entity("School.Models.Teacher", b =>
                 {
                     b.HasOne("School.Models.Rank", "Rank")
-                        .WithMany()
+                        .WithMany("Teacher")
                         .HasForeignKey("RankId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Rank");
+                });
+
+            modelBuilder.Entity("School.Models.Rank", b =>
+                {
+                    b.Navigation("Teacher");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,13 +6,13 @@ using NuGet.DependencyResolver;
 
 namespace School.Controllers
 {
-    public class ClassController : Controller
+    public class RankController : Controller
     {
-        private ISchoolRepository<Class> classRepository;
+        private ISchoolRepository<Rank> rankRepository;
 
-        public ClassController(ISchoolRepository<Class> classRepository)
+        public RankController(ISchoolRepository<Rank> rankRepository)
         {
-            this.classRepository = classRepository;
+            this.rankRepository = rankRepository;
         }
 
 
@@ -21,15 +21,15 @@ namespace School.Controllers
         // GET: ClassController
         public ActionResult Index()
         {
-            var classes = classRepository.List();
-            return View(classes);
+            var ranks = rankRepository.List();
+            return View(ranks);
         }
 
         // GET: ClassController/Details/5
         public ActionResult Details(int id)
         {
-            var classes = classRepository.Find(id);
-            return View(classes);
+            var ranks = rankRepository.Find(id);
+            return View(ranks);
         }
 
         // GET: ClassController/Create
@@ -41,11 +41,11 @@ namespace School.Controllers
         // POST: ClassController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Class classes)
+        public ActionResult Create(Rank ranks)
         {
             try
             {
-                classRepository.Add(classes);
+                rankRepository.Add(ranks);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -63,11 +63,11 @@ namespace School.Controllers
         // POST: ClassController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Class classes)
+        public ActionResult Edit(int id, Rank ranks)
         {
             try
             {
-                classRepository.Update(id, classes);
+                rankRepository.Update(id, ranks);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -79,18 +79,18 @@ namespace School.Controllers
         // GET: ClassController/Delete/5
         public ActionResult Delete(int id)
         {
-            var classes = classRepository.Find(id);
+            var ranks = rankRepository.Find(id);
             return View();
         }
 
         // POST: ClassController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Class classes)
+        public ActionResult Delete(int id, Rank ranks)
         {
             try
             {
-                classRepository.Delete(id);
+                rankRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

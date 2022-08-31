@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.Models;
 
@@ -10,9 +11,10 @@ using School.Models;
 namespace School.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220829065549_foreign key added")]
+    partial class foreignkeyadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,17 @@ namespace School.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("School.Models.Rank", b =>
+            modelBuilder.Entity("School.Models.Class", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ClassId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassId"), 1L, 1);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("ClassId");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Ranks");
+                    b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("School.Models.Student", b =>
@@ -46,6 +44,9 @@ namespace School.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
@@ -53,12 +54,9 @@ namespace School.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RankId")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("RankId");
+                    b.HasIndex("ClassId");
 
                     b.ToTable("Students");
                 });
@@ -71,6 +69,9 @@ namespace School.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -79,36 +80,33 @@ namespace School.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RankId")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("RankId");
+                    b.HasIndex("ClassId");
 
                     b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("School.Models.Student", b =>
                 {
-                    b.HasOne("School.Models.Rank", "Rank")
+                    b.HasOne("School.Models.Class", "Class")
                         .WithMany()
-                        .HasForeignKey("RankId")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Rank");
+                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("School.Models.Teacher", b =>
                 {
-                    b.HasOne("School.Models.Rank", "Rank")
+                    b.HasOne("School.Models.Class", "Class")
                         .WithMany()
-                        .HasForeignKey("RankId")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Rank");
+                    b.Navigation("Class");
                 });
 #pragma warning restore 612, 618
         }

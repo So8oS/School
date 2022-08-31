@@ -9,14 +9,15 @@ namespace School.Models
 {
     public class Student
     {
-        public String Name { get; set; }
-
         [Key]
         public int ID { get; set; }
 
+        public String Name { get; set; }
+
         public int Grade { get; set; }
 
-       // public Class Class { get; set; }
+        public int RankId { get; set; }
+        public Rank Rank { get; set; }
 
 
     }

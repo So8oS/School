@@ -21,8 +21,8 @@ namespace School.Controllers
         // GET: StudentController
         public ActionResult Index()
         {
-            var Students = StudentRepository.List();
-            return View(Students);
+            var students = StudentRepository.List();
+            return View(students);
         }
 
         // GET: StudentController/Details/5

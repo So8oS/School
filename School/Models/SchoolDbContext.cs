@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using School.ViewModel;
 
 namespace School.Models
 {
@@ -10,8 +11,9 @@ namespace School.Models
         }
 
 
-        public DbSet<Class> Classes { get; set; }
+        public DbSet<Rank> Ranks { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+       // public DbSet<School.ViewModel.RankViewModel>? RankViewModel { get; set; }
     }
 }
