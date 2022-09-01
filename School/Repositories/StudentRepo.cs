@@ -1,4 +1,6 @@
-﻿namespace School.Models.Repositories
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace School.Models.Repositories
 {
     public class StudentRepo : ISchoolRepository<Student>
     {
@@ -23,14 +25,14 @@
 
         public Student Find(int id)
         {
-            var student = db.Students.SingleOrDefault(x => x.ID == id);
+            var student = db.Students.Include(x => x.Rank).SingleOrDefault(x => x.ID == id);
             return student;
 
         }
 
         public IList<Student> List()
         {
-            return db.Students.ToList();
+            return db.Students.Include(x => x.Rank).ToList();
         }
 
         public void Update(int id, Student newStudent)

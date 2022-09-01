@@ -11,7 +11,9 @@ namespace School.Models
     public class Rank
     {
         [Key]
+        [Display(Name = "Class Id")]
         public int Id { get; set; }
+        [Display(Name = "Class Number")]
         public String Name { get; set; }
 
 

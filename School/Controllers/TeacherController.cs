@@ -37,6 +37,17 @@ namespace School.Controllers
             return View(teacher);
         }
 
+
+
+
+
+
+
+
+
+
+
+
         // GET: TeacherController/Create
         public ActionResult Create()
         {
@@ -85,6 +96,9 @@ namespace School.Controllers
 
 
 
+        
+
+
 
         // EDDDDDIIIIIIIIIIIIIIIIIITTTTTTTTTTTT 
         // GET: TeacherController/Edit/5
@@ -125,11 +139,6 @@ namespace School.Controllers
                 };
 
                 teacherRepository.Update(viewModel.TeacherId, teacher);
-
-
-
-
-                // teacherRepository.Update(id, teacher);  
                 return RedirectToAction(nameof(Index));
             }
             catch

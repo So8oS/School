@@ -27,9 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Rank.Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rank.Id)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -51,16 +49,7 @@
                          <td>
                     @Html.DisplayFor(modelItem => item.Rank.Name)
                        </td>
-                      <td>
-                    @Html.DisplayFor(modelItem => item.Rank.Id)
-                       </td>
-          
-
-
-
-
-
-
+                     
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |

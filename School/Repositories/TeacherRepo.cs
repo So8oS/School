@@ -26,7 +26,6 @@ namespace School.Models.Repositories
         public void Delete(int id)
         {
             var teacher = Find(id); 
-
             db.Teachers.Remove(teacher);
             db.SaveChanges();
         }

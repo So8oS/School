@@ -10,7 +10,10 @@ namespace School.Models
     public class Teacher
     {
         [Key]
+        [Display(Name = "Teacher Id")]
         public int ID { get; set; }
+
+        [Display(Name = "Teacher Name")]
         public String Name { get; set; }
 
         public String Occupation { get; set; }
