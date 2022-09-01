@@ -92,14 +92,14 @@ namespace School.Controllers
         {
 
             var teacher = teacherRepository.Find(id);
-           // var rankId = teacher.Rank == null ? teacher.Rank.Id = 0 : teacher.Rank.Id;
+            var rankId = teacher.Rank == null ? teacher.Rank.Id = 0 : teacher.Rank.Id;
 
             var viewModel = new RankViewModel
             {
                 TeacherId = teacher.ID,
                 Name = teacher.Name,
                 Occupation = teacher.Occupation,
-                RankId = teacher.Rank.Id,
+                RankId = rankId,
                 Ranks = rankRepository.List().ToList()
             };
 

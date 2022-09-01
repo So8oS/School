@@ -33,13 +33,13 @@ namespace School.Models.Repositories
 
         public Teacher Find(int id)
         {
-            var teacher = db.Teachers.SingleOrDefault(x => x.ID == id);
+            var teacher = db.Teachers.Include(x=>x.Rank).SingleOrDefault(x => x.ID == id);
             return teacher; 
         }
 
         public IList<Teacher> List()
         {
-            return db.Teachers.ToList();
+            return db.Teachers.Include(x => x.Rank).ToList();
         }
 
 
