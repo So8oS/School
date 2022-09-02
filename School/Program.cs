@@ -13,6 +13,7 @@ builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
 builder.Services.AddScoped<ISchoolRepository<Teacher>,TeacherRepo>();
 builder.Services.AddScoped<ISchoolRepository<Student>, StudentRepo>();
 builder.Services.AddScoped<ISchoolRepository<Rank>, RankRepo>();
+builder.Services.AddScoped<ISchoolRepository<Subject>, SubjectRepo>();
 builder.Services.AddDbContext<SchoolDbContext>(options
     => options.UseSqlServer
     (builder.Configuration.GetConnectionString("sqlcon")

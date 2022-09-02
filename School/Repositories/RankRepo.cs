@@ -11,10 +11,6 @@
         }
 
 
-
-
-
-
         public void Add(Rank entity)
         {
             db.Ranks.Add(entity);

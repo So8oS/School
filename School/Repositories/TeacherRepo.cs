@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +8,10 @@ namespace School.Models.Repositories
     public class TeacherRepo : ISchoolRepository<Teacher>
     {
         SchoolDbContext db;
-        
+
         public TeacherRepo(SchoolDbContext _db)
         {
-          db = _db;
+            db = _db;
         }
 
 
@@ -25,15 +24,15 @@ namespace School.Models.Repositories
 
         public void Delete(int id)
         {
-            var teacher = Find(id); 
+            var teacher = Find(id);
             db.Teachers.Remove(teacher);
             db.SaveChanges();
         }
 
         public Teacher Find(int id)
         {
-            var teacher = db.Teachers.Include(x=>x.Rank).SingleOrDefault(x => x.ID == id);
-            return teacher; 
+            var teacher = db.Teachers.Include(x => x.Rank).SingleOrDefault(x => x.ID == id);
+            return teacher;
         }
 
         public IList<Teacher> List()
