@@ -16,6 +16,7 @@ namespace School.Models
         [Display(Name = "Class Number")]
         public String Name { get; set; }
 
+        public List<SubjectRank> SubjectRank { get; set; }
 
 
     }

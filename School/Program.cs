@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using School.Models;
 using School.Models.Repositories;
+using School.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddScoped<ISchoolRepository<Teacher>,TeacherRepo>();
 builder.Services.AddScoped<ISchoolRepository<Student>, StudentRepo>();
 builder.Services.AddScoped<ISchoolRepository<Rank>, RankRepo>();
 builder.Services.AddScoped<ISchoolRepository<Subject>, SubjectRepo>();
+builder.Services.AddScoped<ISchoolRepository<SubjectRank>, SubjectRankRepo>();
 builder.Services.AddDbContext<SchoolDbContext>(options
     => options.UseSqlServer
     (builder.Configuration.GetConnectionString("sqlcon")

@@ -11,8 +11,8 @@ using School.Models;
 namespace School.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20220901112150_SRVMupdated")]
-    partial class SRVMupdated
+    [Migration("20220907090555_deleted")]
+    partial class deleted
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,46 @@ namespace School.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("School.Models.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("School.Models.SubjectRank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("RankId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RankId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("SubjectRanks");
+                });
+
             modelBuilder.Entity("School.Models.Teacher", b =>
                 {
                     b.Property<int>("ID")
@@ -102,6 +142,25 @@ namespace School.Migrations
                     b.Navigation("Rank");
                 });
 
+            modelBuilder.Entity("School.Models.SubjectRank", b =>
+                {
+                    b.HasOne("School.Models.Rank", "Rank")
+                        .WithMany("SubjectRank")
+                        .HasForeignKey("RankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("School.Models.Subject", "Subject")
+                        .WithMany("SubjectRank")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rank");
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("School.Models.Teacher", b =>
                 {
                     b.HasOne("School.Models.Rank", "Rank")
@@ -111,6 +170,16 @@ namespace School.Migrations
                         .IsRequired();
 
                     b.Navigation("Rank");
+                });
+
+            modelBuilder.Entity("School.Models.Rank", b =>
+                {
+                    b.Navigation("SubjectRank");
+                });
+
+            modelBuilder.Entity("School.Models.Subject", b =>
+                {
+                    b.Navigation("SubjectRank");
                 });
 #pragma warning restore 612, 618
         }

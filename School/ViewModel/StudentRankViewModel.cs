@@ -5,7 +5,7 @@ namespace School.ViewModel
 {
     public class StudentRankViewModel
     {
-        [Key]
+        
         public int StudentId { get; set; }
         public string Name { get; set; }
 

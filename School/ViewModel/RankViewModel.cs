@@ -5,7 +5,7 @@ namespace School.ViewModel
 {
     public class RankViewModel
     {
-        [Key]
+        
         [Display(Name = "Teacher Id")]
         public int TeacherId { get; set; }
         [Display(Name = "Teacher Name")]
